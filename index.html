@@ -13,16 +13,18 @@ p{color:#666;line-height:1.6}
 </head>
 <body>
 <div class="card">
-  <h2>打开公司公共盘</h2>
-  <p>点击下面按钮，将调用本机已注册的 companyfolder 协议。</p>
-  <button onclick="openFolder()">打开文件夹</button>
+  <h2>正在打开公司公共盘</h2>
+  <p>正在自动打开对应产品文件夹……</p>
+
+  <button onclick="openFolder()">如果没有自动打开，请点这里</button>
+
   <p id="msg"></p>
 </div>
 <script>
 const params = new URLSearchParams(window.location.search);
 const id = params.get("id") || "";
 
-function openFolder(){
+function openFolder() {
     if (!id) {
         document.getElementById("msg").textContent = "没有读取到产品编号";
         return;
@@ -31,6 +33,13 @@ function openFolder(){
     document.getElementById("msg").textContent = "正在打开：" + id;
     window.location.href = "companyfolder://" + encodeURIComponent(id);
 }
+
+// 网页打开后自动执行
+window.addEventListener("load", function () {
+    if (id) {
+        setTimeout(openFolder, 300);
+    }
+});
 </script>
 </body>
 </html>
