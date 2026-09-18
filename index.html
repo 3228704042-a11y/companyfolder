@@ -19,9 +19,17 @@ p{color:#666;line-height:1.6}
   <p id="msg"></p>
 </div>
 <script>
+const params = new URLSearchParams(window.location.search);
+const id = params.get("id") || "";
+
 function openFolder(){
-  document.getElementById('msg').textContent='正在尝试打开…';
-  window.location.href='companyfolder://test';
+    if (!id) {
+        document.getElementById("msg").textContent = "没有读取到产品编号";
+        return;
+    }
+
+    document.getElementById("msg").textContent = "正在打开：" + id;
+    window.location.href = "companyfolder://" + encodeURIComponent(id);
 }
 </script>
 </body>
