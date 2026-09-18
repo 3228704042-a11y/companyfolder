@@ -3,43 +3,120 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
 <title>打开公司文件夹</title>
+
 <style>
-body{font-family:Segoe UI,Arial,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0;background:#f5f6f8}
-.card{background:#fff;padding:32px;border-radius:14px;box-shadow:0 8px 30px rgba(0,0,0,.08);text-align:center;max-width:420px}
-button{font-size:18px;padding:12px 22px;border:0;border-radius:9px;cursor:pointer}
-p{color:#666;line-height:1.6}
+body{
+    font-family:Segoe UI,Arial,sans-serif;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-height:100vh;
+    margin:0;
+    background:#f5f6f8;
+}
+
+.card{
+    background:#fff;
+    padding:32px;
+    border-radius:14px;
+    box-shadow:0 8px 30px rgba(0,0,0,.08);
+    text-align:center;
+    max-width:460px;
+    width:calc(100% - 40px);
+}
+
+h2{
+    margin-top:0;
+}
+
+p{
+    color:#666;
+    line-height:1.6;
+}
+
+button{
+    font-size:18px;
+    padding:12px 22px;
+    border:0;
+    border-radius:9px;
+    cursor:pointer;
+}
+
+#msg{
+    margin-top:18px;
+    font-size:14px;
+}
 </style>
 </head>
+
 <body>
+
 <div class="card">
-  <h2>正在打开公司公共盘</h2>
-  <p>正在自动打开对应产品文件夹……</p>
 
-  <button onclick="openFolder()">如果没有自动打开，请点这里</button>
+    <h2>正在打开公司公共盘</h2>
 
-  <p id="msg"></p>
+    <p>
+        正在自动打开对应产品文件夹……
+    </p>
+
+    <button onclick="openFolder()">
+        如果没有自动打开，请点这里
+    </button>
+
+    <p id="msg"></p>
+
 </div>
+
 <script>
+
 const params = new URLSearchParams(window.location.search);
+
 const id = params.get("id") || "";
 
-function openFolder() {
+
+function openFolder(){
+
     if (!id) {
-        document.getElementById("msg").textContent = "没有读取到产品编号";
+
+        document.getElementById("msg").textContent =
+            "没有读取到产品编号";
+
         return;
     }
 
-    document.getElementById("msg").textContent = "正在打开：" + id;
-    window.location.href = "companyfolder://" + encodeURIComponent(id);
+
+    document.getElementById("msg").textContent =
+        "正在打开：" + id;
+
+
+    window.location.href =
+        "companyfolder://" + encodeURIComponent(id);
+
 }
 
-// 网页打开后自动执行
-window.addEventListener("load", function () {
+
+/* 页面打开后自动尝试打开公共盘 */
+window.addEventListener("load", function(){
+
     if (id) {
+
+        document.getElementById("msg").textContent =
+            "正在打开：" + id;
+
         setTimeout(openFolder, 300);
+
+    }else{
+
+        document.getElementById("msg").textContent =
+            "链接中没有产品编号";
+
     }
+
 });
+
 </script>
+
 </body>
 </html>
