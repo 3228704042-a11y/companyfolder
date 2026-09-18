@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>打开公司文件夹</title>
+<style>
+body{font-family:Segoe UI,Arial,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0;background:#f5f6f8}
+.card{background:#fff;padding:32px;border-radius:14px;box-shadow:0 8px 30px rgba(0,0,0,.08);text-align:center;max-width:420px}
+button{font-size:18px;padding:12px 22px;border:0;border-radius:9px;cursor:pointer}
+p{color:#666;line-height:1.6}
+</style>
+</head>
+<body>
+<div class="card">
+  <h2>打开公司公共盘</h2>
+  <p>点击下面按钮，将调用本机已注册的 companyfolder 协议。</p>
+  <button onclick="openFolder()">打开文件夹</button>
+  <p id="msg"></p>
+</div>
+<script>
+function openFolder(){
+  document.getElementById('msg').textContent='正在尝试打开…';
+  window.location.href='companyfolder://test';
+}
+</script>
+</body>
+</html>
